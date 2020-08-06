@@ -1,0 +1,34 @@
+{
+    "name": "altec-icex/skeleton-windows",
+    "type": "library",
+    "description": "Skeleton window template model",
+    "keywords": [
+        "windows",
+        "template",
+        "model"
+    ],
+    "homepage": "https://altec.ru",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrei Dyukhin",
+            "email": "icex@altec.ru",
+            "role": "Lead Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "SkeletonWindows\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SkeletonWindows\\Tests\\": "tests/"
+        }
+    }
+}
