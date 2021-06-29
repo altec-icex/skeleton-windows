@@ -35,7 +35,8 @@ final class SashFrame extends Inset {
 	const TopHung = 5;
 
 	private $openType;
-	private $mosquito = false;
+	private $mosquito;
+
 	private $aperture;
 
 	public function __construct(Aperture $parentAperture, int $openType) {
@@ -55,25 +56,33 @@ final class SashFrame extends Inset {
 	/**
 	 * Устанавливает тип открывания
 	 */
-	public function setOpenType(int $value) {
+	public function setOpenType(int $value): self {
 		$this->openType = $value;
 		return $this;
 	}
 
 	/**
-	 * Признак наличия москитной сетки
-	 *
-	 * Возвращает true, если створке нужна москитная сетка, иначе false
+	 * Возвращает москитную сетку
 	 */
-	public function getMosquito(): bool {
+	public function getMosquito(): ?Mosquito {
 		return $this->mosquito;
 	}
 
 	/**
-	 * Устанавливает наличие москитной сетки
+	 * Вставка москитной сетки
+	 * 
+	 * Добавляет москитную сетку и возвращает её
 	 */
-	public function setMosquito(bool $value) {
-		$this->mosquito = $value;
+	public function addMosquito(string $systemCode): Mosquito {
+		$this->mosquito = new Mosquito($this, $systemCode);
+		return $this->mosquito;
+	}
+
+	/**
+	 * Удаление москитной сетки
+	 */
+	public function removeMosquito(): self {
+		$this->mosquito = null;
 		return $this;
 	}
 

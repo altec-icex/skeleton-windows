@@ -46,7 +46,7 @@ final class UnitFrame {
 	/**
 	 * Устанавливает ширину рамы
 	 */
-	public function setWidth(float $value) {
+	public function setWidth(float $value): self {
 		$this->width = $value;
 		return $this;
 	}
@@ -61,7 +61,7 @@ final class UnitFrame {
 	/**
 	 * Устанавливает высоту рамы
 	 */
-	public function setHeight(float $value) {
+	public function setHeight(float $value): self {
 		$this->height = $value;
 		return $this;
 	}

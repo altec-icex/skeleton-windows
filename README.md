@@ -70,6 +70,7 @@ $model->setUserParameterValue('installation', true);
 
 // Добавляем раму изделия c типом "window" и габаритами 1400 x 1400 мм
 $frame = $model->add('window', 1400, 1400);
+// Устанавливаем польз. параметры изделия
 $frame->setUserParameterValue('base_profile', true);
 
 // Берём проём рамы
@@ -81,9 +82,12 @@ $impost = $aperture->insertImpost(false, 700);
 $aperture = $impost->getLeftTopAperture();
 // Вставляем в проём створку с типом открывания "поворотное влево"
 $sash = $aperture->insertSash(SashFrame::LeftTurn);
-// Устанавливаем москитную сетку к створке
-$sash->setMosquito(true);
+// Устанавливаем польз. параметры створки
 $sash->setUserParameterValue('micro_airing', true);
+// Устанавливаем москитную сетку из системы с кодом "system_code" к створке
+$mosquito = $sash->addMosquito('system_code');
+// Устанавливаем польз. параметры москитной сетки
+$mosquito->setUserParameterValue('anti_cat', true);
 // Берём проём створки
 $aperture = $sash->getAperture();
 // Вставляем в проём стеклопакет
@@ -93,6 +97,7 @@ $aperture->insertFilling(false);
 $aperture = $impost->getRightBottomAperture();
 // Вставляем в проём стеклопакет
 $filling = $aperture->insertFilling(false);
+// Устанавливаем польз. параметры cтеклопакета
 $filling->setUserParameterValue('coating', 'low_e');
 
 // Добавляем раму изделия c типом "door" и габаритами 800 x 2000 мм

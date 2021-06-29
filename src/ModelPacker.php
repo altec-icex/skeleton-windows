@@ -74,6 +74,39 @@
 //	}, ..],
 //	userParameters: {} //v2
 
+//	version: 3,
+//	frames: [{
+//		itemType: 'code',
+//		width: value in mm,
+//		height: value in mm,
+//		unitUserParameters: {}, 
+//		fillType: [[undefined|0]|1|2],
+//		fillingUserParameters: {}, 
+//		openType: [undefined|0..5],
+//		sashUserParameters: {},
+//		mosquito: [[undefined|false]|true],
+//		mosquitoSystem: 'code', //v3
+//		mosquitoUserParameters: {}, //v3
+//		divDir: [0|1],
+//		divs: [{
+//			pos: value in mm or %,
+//			posType: [[undefined|0]|1]
+//		}, ..],
+//		apertures: [{
+//			fillType,
+//			fillingUserParameters,
+//			openType,
+//			sashUserParameters,
+//			mosquito,
+//			mosquitoSystem,
+//			mosquitoUserParameters,
+//			divDir,
+//			divs,
+//			apertures
+//		}, ..]
+//	}, ..],
+//	userParameters: {}
+
 /**
  * Класс упаковщика модели
  */
@@ -102,9 +135,17 @@ class ModelPacker implements ModelPackerInterface {
 	private function packSash(SashFrame $sash): array{
 		$pack = array(
 			'openType' => $sash->getOpenType(),
-			'mosquito' => $sash->getMosquito(),
 			'sashUserParameters' => $this->packUserParameters($sash->getUserParameters())
 		);
+
+		$mosquito = $sash->getMosquito();
+		if ($mosquito) {
+			$pack['mosquito'] = true;
+			$pack['mosquitoSystem'] = $mosquito->getSystemCode();
+			$pack['mosquitoUserParameters'] = $this->packUserParameters($mosquito->getUserParameters());
+		} else {
+			$pack['mosquito'] = false;
+		}
 
 		$pack['apertures'] = array($this->packAperture($sash->getAperture()));
 
@@ -223,7 +264,7 @@ class ModelPacker implements ModelPackerInterface {
 		}
 
 		$pack = array(
-			'version' => 2,
+			'version' => 3,
 			'frames' => $this->packFrames($model),
 			'userParameters' => $this->packUserParameters($model->getUserParameters())
 		);
