@@ -27,7 +27,7 @@ final class Aperture {
 	/**
 	 * Вставка створки
 	 *
-	 * Замещает текущую вставку сторкой и возвращает её
+	 * Замещает текущую вставку створкой и возвращает её
 	 */
 	public function insertSash(int $openType): SashFrame {
 		$sash = new SashFrame($this, $openType);

@@ -5,7 +5,7 @@
  */
 final class UnitFrame {
 	/**
-	 * Пользовательские изделия
+	 * Пользовательские параметры изделия
 	 */
 	use UserParametersTrait;
 
